@@ -209,6 +209,12 @@ class DataTrainingArguments:
         metadata={"help": "Whether to trust the remote code"},
     )
 
+    #per_device_train_batch_size: Optional[int] = field(
+    #    default=1,
+    #    metadata={"help": "The number of processes to use for the preprocessing."},
+    #)
+
+
     def __post_init__(self):
         if self.dataset_name is None and self.train_file is None and self.validation_file is None:
             raise ValueError(
@@ -237,8 +243,10 @@ def main():
         model_args, data_args, training_args = parser.parse_json_file(
             json_file=os.path.abspath(sys.argv[1]))
     else:
-        model_args, data_args, training_args = parser.parse_args_into_dataclasses()
-
+        model_args, data_args, training_args, remaing = parser.parse_args_into_dataclasses(return_remaining_strings=True)
+        print("++++++++++++++++++++++++++=====================================>>>>>>>>>>>>>>>>",training_args)
+        training_args.per_device_eval_batch_size=1
+        training_args.per_device_train_batch_size=1
     # Detecting last checkpoint.
     last_checkpoint = None
     if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
