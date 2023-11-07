@@ -511,9 +511,11 @@ def main():
                 f"({tokenizer.model_max_length}). Using block_size={tokenizer.model_max_length}."
             )
         block_size = min(data_args.block_size, tokenizer.model_max_length)
+        
 
-
-
+    block_size = get_max_length(model)
+    print("Block size =========================>", block_size)
+    tokenizer.model_max_length = block_size
 
     # Main data processing function that will make each entry its own in the dataset
     def single_texts(examples):
