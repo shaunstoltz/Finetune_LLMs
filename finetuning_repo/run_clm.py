@@ -52,6 +52,21 @@ import os
 import torch
 
 
+# SOURCE https://github.com/databrickslabs/dolly/blob/master/training/trainer.py
+def get_max_length(model):
+    conf = model.config
+    max_length = None
+    for length_setting in ["n_positions", "max_position_embeddings", "seq_length"]:
+        max_length = getattr(model.config, length_setting, None)
+        if max_length:
+            print(f"Found max lenth: {max_length}")
+            break
+    if not max_length:
+        max_length = 1024
+        print(f"Using default max length: {max_length}")
+    return max_length
+
+
 if "WANDB_PROJECT" not in os.environ:
     os.environ["WANDB_PROJECT"] = "GPT_finetuning"
 os.environ["WANDB_DISABLE_CODE"] = "true"
@@ -209,12 +224,6 @@ class DataTrainingArguments:
         metadata={"help": "Whether to trust the remote code"},
     )
 
-    #per_device_train_batch_size: Optional[int] = field(
-    #    default=1,
-    #    metadata={"help": "The number of processes to use for the preprocessing."},
-    #)
-
-
     def __post_init__(self):
         if self.dataset_name is None and self.train_file is None and self.validation_file is None:
             raise ValueError(
@@ -243,10 +252,8 @@ def main():
         model_args, data_args, training_args = parser.parse_json_file(
             json_file=os.path.abspath(sys.argv[1]))
     else:
-        model_args, data_args, training_args, remaing = parser.parse_args_into_dataclasses(return_remaining_strings=True)
-        print("++++++++++++++++++++++++++=====================================>>>>>>>>>>>>>>>>",training_args)
-        training_args.per_device_eval_batch_size=1
-        training_args.per_device_train_batch_size=1
+        model_args, data_args, training_args = parser.parse_args_into_dataclasses()
+
     # Detecting last checkpoint.
     last_checkpoint = None
     if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
@@ -492,6 +499,11 @@ def main():
                 "Picking 1024 instead. You can change that default value by passing --block_size xxx."
             )
         block_size = 1024
+
+        # Set block size based on model
+        block_size = get_max_length(model)
+        print("Block size =========================>", block_size)
+
     else:
         if data_args.block_size > tokenizer.model_max_length:
             logger.warn(
@@ -499,6 +511,9 @@ def main():
                 f"({tokenizer.model_max_length}). Using block_size={tokenizer.model_max_length}."
             )
         block_size = min(data_args.block_size, tokenizer.model_max_length)
+
+
+
 
     # Main data processing function that will make each entry its own in the dataset
     def single_texts(examples):
