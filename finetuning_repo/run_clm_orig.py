@@ -52,21 +52,6 @@ import os
 import torch
 
 
-# SOURCE https://github.com/databrickslabs/dolly/blob/master/training/trainer.py
-def get_max_length(model):
-    conf = model.config
-    max_length = None
-    for length_setting in ["n_positions", "max_position_embeddings", "seq_length"]:
-        max_length = getattr(model.config, length_setting, None)
-        if max_length:
-            print(f"Found max lenth: {max_length}")
-            break
-    if not max_length:
-        max_length = 1024
-        print(f"Using default max length: {max_length}")
-    return max_length
-
-
 if "WANDB_PROJECT" not in os.environ:
     os.environ["WANDB_PROJECT"] = "GPT_finetuning"
 os.environ["WANDB_DISABLE_CODE"] = "true"
@@ -499,11 +484,6 @@ def main():
                 "Picking 1024 instead. You can change that default value by passing --block_size xxx."
             )
         block_size = 1024
-
-        # Set block size based on model
-        # block_size = get_max_length(model)
-        # print("Block size =========================>", block_size)
-
     else:
         if data_args.block_size > tokenizer.model_max_length:
             logger.warn(
@@ -511,11 +491,6 @@ def main():
                 f"({tokenizer.model_max_length}). Using block_size={tokenizer.model_max_length}."
             )
         block_size = min(data_args.block_size, tokenizer.model_max_length)
-        
-
-    # block_size = get_max_length(model)
-    # print("Block size =========================>", block_size)
-    # tokenizer.model_max_length = block_size
 
     # Main data processing function that will make each entry its own in the dataset
     def single_texts(examples):
