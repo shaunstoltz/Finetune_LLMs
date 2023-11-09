@@ -13,6 +13,9 @@ import transformers
 from typing import Dict
 from llama_attn_replace import replace_llama_attn
 from typing import List, Optional
+from accelerate import Accelerator
+import numpy as np
+import random
 
 
 from utils import get_logger
@@ -23,6 +26,12 @@ DEFAULT_PAD_TOKEN = "[PAD]"
 DEFAULT_EOS_TOKEN = "</s>"
 DEFAULT_BOS_TOKEN = "<s>"
 DEFAULT_UNK_TOKEN = "<unk>"
+
+def seed_all(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    random.seed(seed)
 
 
 def smart_tokenizer_and_embedding_resize(
@@ -75,6 +84,7 @@ def find_all_linear_names(args, model,add_lm_head=True):
     if add_lm_head and not "lm_head" in lora_module_names:
         logger.info("Adding lm_head to lora_module_names")
         lora_module_names.add("lm_head")
+
     return list(lora_module_names)
 
 def get_config(args):
@@ -85,6 +95,12 @@ def get_config(args):
     config = AutoConfig.from_pretrained(args.model_name, **config_kwargs)
 
     config.use_cache = False
+    if not args.gradient_checkpointing:
+        logger.info("Not using gradient checkpointing")
+        config.gradient_checkpointing = False
+    else:
+        logger.info("Using gradient checkpointing")
+        config.gradient_checkpointing = True
 
     orig_ctx_len = getattr(config, "max_position_embeddings", None)
     if orig_ctx_len and args.block_size > orig_ctx_len and args.rope_scale is None:
@@ -107,7 +123,7 @@ if __name__ == "__main__":
     parser.add_argument("--split_model", action="store_true",default=False)
     parser.add_argument("--block_size", type=int, default=128)
     parser.add_argument("--lora_rank", type=int, default=64)
-    parser.add_argument("--lora_alpha", type=int, default=16)
+    parser.add_argument("--lora_alpha", type=int, default=None)
     parser.add_argument("--lora_dropout", type=float, default=0.1)
 
     parser.add_argument("-lr","--learning_rate", type=float, default=1e-4)
@@ -144,9 +160,16 @@ if __name__ == "__main__":
 
     parser.add_argument("--train_dataset_ratio",default=1.0,type=float,help="Ratio of the training dataset to use")
     parser.add_argument("--validation_dataset_ratio",default=1.0,type=float,help="Ratio of the validation dataset to use")
+    parser.add_argument("--seed",default=42,type=int,help="Seed for random number generators")
 
     parser.add_argument("--completion_only", default=False,action="store_true", help="Only use completion loss")
     args = parser.parse_args()
+
+    seed_all(args.seed)
+
+    if args.lora_alpha is None:
+        args.lora_alpha = args.lora_rank * 2
+        logger.info("Lora alpha set to None... Setting lora_alpha to %d", args.lora_alpha)
 
     # replace_llama_attn(use_full=False)
 
@@ -221,6 +244,9 @@ if __name__ == "__main__":
             bnb_4bit_compute_dtype=torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16,
             bnb_4bit_use_double_quant=True,
         )
+        device_index = Accelerator().process_index
+        device_map = {"": device_index}
+        kwargs["device_map"] = device_map
         optimizer = "adamw_bnb_8bit"
         args.use_int8 = False
     elif args.use_int8:
@@ -235,7 +261,7 @@ if __name__ == "__main__":
         optimizer = "adamw_torch"
 
     torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
-    model = AutoModelForCausalLM.from_pretrained(args.model_name, token=access_token,quantization_config=bnb_config,trust_remote_code=args.trust_remote_code,torch_dtype=torch_dtype,config=config,use_flash_attention_2=True, **kwargs)
+    model = AutoModelForCausalLM.from_pretrained(args.model_name, token=access_token,quantization_config=bnb_config,trust_remote_code=args.trust_remote_code,torch_dtype=torch_dtype,config=config,use_flash_attention_2=use_flash_attention, **kwargs)
     added_tokens = smart_tokenizer_and_embedding_resize(
         special_tokens_dict=special_tokens_dict,
         tokenizer=tokenizer,
@@ -272,7 +298,7 @@ if __name__ == "__main__":
         logger.info("Using LORA...")
         if args.use_int4 or args.use_int8:
             logger.info("Preparing model for kbit training...")
-            model = prepare_model_for_kbit_training(model)
+            model = prepare_model_for_kbit_training(model,use_gradient_checkpointing=True if args.gradient_checkpointing else False)
 
         logger.info("Getting PEFT model...")
         model = get_peft_model(model, peft_config)
@@ -312,11 +338,11 @@ if __name__ == "__main__":
 
     train_df = pd.read_csv(args.train_file)
     if args.train_dataset_ratio < 1.0:
-        train_df = train_df.sample(frac=args.train_dataset_ratio)
+        train_df = train_df.sample(frac=args.train_dataset_ratio,random_state=args.seed)
     train_dataset = Dataset.from_pandas(train_df)
     validation_df = pd.read_csv(args.validation_file)
     if args.validation_dataset_ratio < 1.0:
-        validation_df = validation_df.sample(frac=args.validation_dataset_ratio)
+        validation_df = validation_df.sample(frac=args.validation_dataset_ratio,random_state=args.seed)
     validation_dataset = Dataset.from_pandas(validation_df)
 
     if args.completion_only:
