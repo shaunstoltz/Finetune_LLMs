@@ -473,6 +473,7 @@ def main():
     text_column_name = "text" if "text" in column_names else column_names[0]
 
     ############ Adding trainer tokenizer for testing
+    seed = training_args.seed
     def create_prompt_formats(sample, intro_blurb="", instruction_key="", input_key="", response_key="", end_key=""):
         """
         Format various fields of the sample ('instruction', 'context', 'response')
