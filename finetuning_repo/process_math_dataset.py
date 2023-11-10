@@ -78,6 +78,7 @@ MODEL_CONFIG_CLASSES = list(MODEL_FOR_CAUSAL_LM_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)
 
 max_tokenized_id = 0
+max_arr = []
 
 @dataclass
 class ModelArguments:
@@ -481,6 +482,7 @@ def main():
     def create_prompt_formats(sample, intro_blurb="", instruction_key="", input_key="", response_key="", end_key=""):
 
         global max_tokenized_id
+        global max_arr
         """
         Format various fields of the sample ('instruction', 'context', 'response')
         Then concatenate them using two newline characters 
@@ -517,7 +519,15 @@ def main():
 
             max_tokenized_id = tokenized_text_len
 
+            if tokenized_text_len > 1024:
 
+
+            push_obj = {
+                "text": formatted_prompt,
+                "token_len": tokenized_text_len
+            }
+
+            max_arr
 
         return ret_obj
 
@@ -548,6 +558,10 @@ def main():
             create_prompt_formats,
             num_proc=data_args.preprocessing_num_workers
             )#, batched=True)
+
+        print(len(max_arr))
+
+        exit()
         
         print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
         
@@ -586,7 +600,7 @@ def main():
 
 
 
-    max_length = 8000 # get_max_length(model)
+    max_length = 2048 # get_max_length(model)
     tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, datasets, ["question", "answer", "text"])
 
     #################################################
