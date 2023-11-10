@@ -601,7 +601,7 @@ def main():
 
 
 
-    max_length = 2048 # get_max_length(model)
+    max_length = 1024 # get_max_length(model)
     tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, datasets, ["question", "answer", "text"])
 
     #################################################
