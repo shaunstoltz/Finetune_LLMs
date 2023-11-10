@@ -655,22 +655,9 @@ def main():
     
     lm_datasets = load_from_disk("maths")
 
+    eval_dataset = lm_datasets["validation"]
+    train_dataset = lm_datasets["train"]
 
-    if training_args.do_train:
-        if "train" not in tokenized_datasets:
-            raise ValueError("--do_train requires a train dataset")
-        train_dataset = lm_datasets["train"]
-        if data_args.max_train_samples is not None:
-            train_dataset = train_dataset.select(
-                range(data_args.max_train_samples))
-
-    if training_args.do_eval:
-        if "validation" not in tokenized_datasets:
-            raise ValueError("--do_eval requires a validation dataset")
-        eval_dataset = lm_datasets["validation"]
-        if data_args.max_val_samples is not None:
-            eval_dataset = eval_dataset.select(
-                range(data_args.max_val_samples))
 
     # Initialize our Trainer
     trainer = Trainer(
