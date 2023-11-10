@@ -561,10 +561,10 @@ def main():
             load_from_cache_file=not data_args.overwrite_cache,
             )#, batched=True)
 
-        print(len(max_arr))
+        # print(len(max_arr))
         
-        print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
-        exit()
+        # print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
+        # exit()
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
         _preprocessing_function = partial(preprocess_batch, max_length=max_tokenized_id, tokenizer=tokenizer)
