@@ -522,12 +522,12 @@ def main():
             if tokenized_text_len > 1024:
 
 
-            push_obj = {
-                "text": formatted_prompt,
-                "token_len": tokenized_text_len
-            }
+                push_obj = {
+                    "text": formatted_prompt,
+                    "token_len": tokenized_text_len
+                }
 
-            max_arr
+                max_arr.append(push_obj)
 
         return ret_obj
 
