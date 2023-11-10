@@ -567,7 +567,7 @@ def main():
         # exit()
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
-        _preprocessing_function = partial(preprocess_batch, max_length=max_tokenized_id, tokenizer=tokenizer)
+        _preprocessing_function = partial(preprocess_batch, max_length=max_length, tokenizer=tokenizer)
         dataset = dataset.map(
             _preprocessing_function,
             batched=True,
