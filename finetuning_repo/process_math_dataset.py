@@ -426,39 +426,39 @@ def main():
 
 
 
-    if model_args.model_name_or_path:
+    # if model_args.model_name_or_path:
 
-        if model_args.split_model:
-            logger.info("Splitting model onto multiple devices")
-            kwargs = {}
-            kwargs["device_map"] = "auto"
-        else:
-            kwargs = {}
+    #     if model_args.split_model:
+    #         logger.info("Splitting model onto multiple devices")
+    #         kwargs = {}
+    #         kwargs["device_map"] = "auto"
+    #     else:
+    #         kwargs = {}
 
-        model = AutoModelForCausalLM.from_pretrained(
-                model_args.model_name_or_path,
-                from_tf=bool(".ckpt" in model_args.model_name_or_path),
-                config=config,
-                cache_dir=model_args.cache_dir,
-                revision=model_args.model_revision,
-                use_auth_token=True if model_args.use_auth_token else None,
-                trust_remote_code=True if data_args.trust_remote_code else None,
-                quantization_config=bnb_config,
-                torch_dtype=torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16,
-                token=access_token,
-                **kwargs
-            )
-        if model_args.use_lora:
-            peft_config = LoraConfig(
-                task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
-            )
-            model = get_peft_model(model, peft_config)
-            model.print_trainable_parameters()
+    #     model = AutoModelForCausalLM.from_pretrained(
+    #             model_args.model_name_or_path,
+    #             from_tf=bool(".ckpt" in model_args.model_name_or_path),
+    #             config=config,
+    #             cache_dir=model_args.cache_dir,
+    #             revision=model_args.model_revision,
+    #             use_auth_token=True if model_args.use_auth_token else None,
+    #             trust_remote_code=True if data_args.trust_remote_code else None,
+    #             quantization_config=bnb_config,
+    #             torch_dtype=torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16,
+    #             token=access_token,
+    #             **kwargs
+    #         )
+    #     if model_args.use_lora:
+    #         peft_config = LoraConfig(
+    #             task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
+    #         )
+    #         model = get_peft_model(model, peft_config)
+    #         model.print_trainable_parameters()
 
 
-    else:
-        logger.info("Training new model from scratch")
-        model = AutoModelForCausalLM.from_config(config)
+    # else:
+    #     logger.info("Training new model from scratch")
+    #     model = AutoModelForCausalLM.from_config(config)
         
     if data_args.extra_tokens_file is not None:
         tokens_to_add = get_tokens(os.path.realpath(data_args.extra_tokens_file))
@@ -576,7 +576,7 @@ def main():
 
 
 
-    max_length = get_max_length(model)
+    max_length = 8000 # get_max_length(model)
     tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, datasets, ["question", "answer", "text"])
 
     #################################################
