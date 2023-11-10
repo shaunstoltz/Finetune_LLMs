@@ -572,7 +572,7 @@ def main():
             _preprocessing_function,
             batched=True,
             remove_columns=remove_columns,
-
+            load_from_cache_file=not data_args.overwrite_cache,
         )
 
         # Filter out samples that have input_ids exceeding max_length
