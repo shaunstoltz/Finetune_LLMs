@@ -31,6 +31,7 @@ from pathlib import Path
 from datasets import load_dataset
 from peft import get_peft_model, LoraConfig, TaskType
 
+from functools import partial
 
 import transformers
 from transformers import (
@@ -560,7 +561,7 @@ def main():
 
 
     max_length = get_max_length(model)
-    tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, dataset, ["question", "answer", "text"])
+    tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, datasets, ["question", "answer", "text"])
 
     #################################################
 
@@ -600,7 +601,7 @@ def main():
         result = examples
 
         ################## Removing copy for testing ################
-        #result["labels"] = examples["input_ids"].copy()
+        result["labels"] = examples["input_ids"].copy()
         #############################################################
         
         return result
