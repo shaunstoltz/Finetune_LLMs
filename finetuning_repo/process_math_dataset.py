@@ -474,6 +474,8 @@ def main():
     text_column_name = "text" if "text" in column_names else column_names[0]
 
     ############ Adding trainer tokenizer for testing
+
+    max_tokenized_id = 0
     seed = training_args.seed
     def create_prompt_formats(sample, intro_blurb="", instruction_key="", input_key="", response_key="", end_key=""):
         """
@@ -502,6 +504,17 @@ def main():
         ret_obj = {}
         ret_obj["text"] = formatted_prompt
 
+        tokenized_text = tokenizer(
+            ret_obj["text"]
+        )
+
+        tokenized_text_len = len(tokenized_text["input_ids"])
+
+        if tokenized_text_len > max_tokenized_id:
+            max_tokenized_id = tokenized_text_len
+
+
+
         return ret_obj
 
     def preprocess_batch(batch, tokenizer, max_length):
@@ -525,6 +538,8 @@ def main():
         # Add prompt to each sample
         print("Preprocessing dataset...")
         dataset = dataset.map(create_prompt_formats)#, batched=True)
+
+        print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
         _preprocessing_function = partial(preprocess_batch, max_length=max_length, tokenizer=tokenizer)
@@ -654,71 +669,74 @@ def main():
 
 
 
-    if training_args.do_train:
-        if "train" not in tokenized_datasets:
-            raise ValueError("--do_train requires a train dataset")
-        train_dataset = lm_datasets["train"]
-        if data_args.max_train_samples is not None:
-            train_dataset = train_dataset.select(
-                range(data_args.max_train_samples))
 
-    if training_args.do_eval:
-        if "validation" not in tokenized_datasets:
-            raise ValueError("--do_eval requires a validation dataset")
-        eval_dataset = lm_datasets["validation"]
-        if data_args.max_val_samples is not None:
-            eval_dataset = eval_dataset.select(
-                range(data_args.max_val_samples))
 
-    # Initialize our Trainer
-    trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset if training_args.do_train else None,
-        eval_dataset=eval_dataset if training_args.do_eval else None,
-        tokenizer=tokenizer,
-        # Data collator will default to DataCollatorWithPadding, so we change it.
-        data_collator=default_data_collator,
 
-    )
+    # if training_args.do_train:
+    #     if "train" not in tokenized_datasets:
+    #         raise ValueError("--do_train requires a train dataset")
+    #     train_dataset = lm_datasets["train"]
+    #     if data_args.max_train_samples is not None:
+    #         train_dataset = train_dataset.select(
+    #             range(data_args.max_train_samples))
 
-    # Training
-    if training_args.do_train:
-        if last_checkpoint is not None:
-            checkpoint = last_checkpoint
-        elif model_args.model_name_or_path is not None and os.path.isdir(model_args.model_name_or_path):
-            checkpoint = model_args.model_name_or_path
-        else:
-            checkpoint = None
-        train_result = trainer.train(resume_from_checkpoint=checkpoint)
-        trainer.save_model()  # Saves the tokenizer too for easy upload
+    # if training_args.do_eval:
+    #     if "validation" not in tokenized_datasets:
+    #         raise ValueError("--do_eval requires a validation dataset")
+    #     eval_dataset = lm_datasets["validation"]
+    #     if data_args.max_val_samples is not None:
+    #         eval_dataset = eval_dataset.select(
+    #             range(data_args.max_val_samples))
 
-        metrics = train_result.metrics
+    # # Initialize our Trainer
+    # trainer = Trainer(
+    #     model=model,
+    #     args=training_args,
+    #     train_dataset=train_dataset if training_args.do_train else None,
+    #     eval_dataset=eval_dataset if training_args.do_eval else None,
+    #     tokenizer=tokenizer,
+    #     # Data collator will default to DataCollatorWithPadding, so we change it.
+    #     data_collator=default_data_collator,
 
-        max_train_samples = (
-            data_args.max_train_samples if data_args.max_train_samples is not None else len(
-                train_dataset)
-        )
-        metrics["train_samples"] = min(max_train_samples, len(train_dataset))
+    # )
 
-        trainer.log_metrics("train", metrics)
-        trainer.save_metrics("train", metrics)
-        trainer.save_state()
+    # # Training
+    # if training_args.do_train:
+    #     if last_checkpoint is not None:
+    #         checkpoint = last_checkpoint
+    #     elif model_args.model_name_or_path is not None and os.path.isdir(model_args.model_name_or_path):
+    #         checkpoint = model_args.model_name_or_path
+    #     else:
+    #         checkpoint = None
+    #     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+    #     trainer.save_model()  # Saves the tokenizer too for easy upload
 
-    # Evaluation
-    if training_args.do_eval:
-        logger.info("*** Evaluate ***")
+    #     metrics = train_result.metrics
 
-        metrics = trainer.evaluate()
+    #     max_train_samples = (
+    #         data_args.max_train_samples if data_args.max_train_samples is not None else len(
+    #             train_dataset)
+    #     )
+    #     metrics["train_samples"] = min(max_train_samples, len(train_dataset))
 
-        max_val_samples = data_args.max_val_samples if data_args.max_val_samples is not None else len(
-            eval_dataset)
-        metrics["eval_samples"] = min(max_val_samples, len(eval_dataset))
-        perplexity = math.exp(metrics["eval_loss"])
-        metrics["perplexity"] = perplexity
+    #     trainer.log_metrics("train", metrics)
+    #     trainer.save_metrics("train", metrics)
+    #     trainer.save_state()
 
-        trainer.log_metrics("eval", metrics)
-        trainer.save_metrics("eval", metrics)
+    # # Evaluation
+    # if training_args.do_eval:
+    #     logger.info("*** Evaluate ***")
+
+    #     metrics = trainer.evaluate()
+
+    #     max_val_samples = data_args.max_val_samples if data_args.max_val_samples is not None else len(
+    #         eval_dataset)
+    #     metrics["eval_samples"] = min(max_val_samples, len(eval_dataset))
+    #     perplexity = math.exp(metrics["eval_loss"])
+    #     metrics["perplexity"] = perplexity
+
+    #     trainer.log_metrics("eval", metrics)
+    #     trainer.save_metrics("eval", metrics)
 
 
 def _mp_fn(index):
