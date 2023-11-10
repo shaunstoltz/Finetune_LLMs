@@ -534,6 +534,8 @@ def main():
 
     # SOURCE https://github.com/databrickslabs/dolly/blob/master/training/trainer.py
     def preprocess_dataset(tokenizer: AutoTokenizer, max_length: int, seed, dataset: str, remove_columns: list):
+
+        global max_tokenized_id
         """Format & tokenize it so it is ready for training
         :param tokenizer (AutoTokenizer): Model Tokenizer
         :param max_length (int): Maximum number of tokens to emit from tokenizer
@@ -542,7 +544,7 @@ def main():
         # Add prompt to each sample
         print("Preprocessing dataset...")
         dataset = dataset.map(create_prompt_formats)#, batched=True)
-
+        
         print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
