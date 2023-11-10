@@ -479,6 +479,8 @@ def main():
     
     seed = training_args.seed
     def create_prompt_formats(sample, intro_blurb="", instruction_key="", input_key="", response_key="", end_key=""):
+
+        global max_tokenized_id
         """
         Format various fields of the sample ('instruction', 'context', 'response')
         Then concatenate them using two newline characters 
@@ -512,6 +514,7 @@ def main():
         tokenized_text_len = len(tokenized_text["input_ids"])
 
         if tokenized_text_len > max_tokenized_id:
+
             max_tokenized_id = tokenized_text_len
 
 
