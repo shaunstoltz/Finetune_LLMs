@@ -653,7 +653,7 @@ def main():
     #     logger.info("Grouping texts into single entries")
 
     
-    lm_datasets = load_from_disk("math")
+    lm_datasets = load_from_disk("maths")
 
 
     if training_args.do_train:
