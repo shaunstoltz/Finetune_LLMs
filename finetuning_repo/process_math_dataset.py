@@ -529,6 +529,7 @@ def main():
             batch["text"],
             max_length=max_length,
             truncation=True,
+            padding="max_length"
         )
 
 
@@ -543,16 +544,20 @@ def main():
         
         # Add prompt to each sample
         print("Preprocessing dataset...")
-        dataset = dataset.map(create_prompt_formats)#, batched=True)
+        dataset = dataset.map(
+            create_prompt_formats,
+            num_proc=data_args.preprocessing_num_workers
+            )#, batched=True)
         
         print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
-        _preprocessing_function = partial(preprocess_batch, max_length=max_length, tokenizer=tokenizer)
+        _preprocessing_function = partial(preprocess_batch, max_length=max_tokenized_id, tokenizer=tokenizer)
         dataset = dataset.map(
             _preprocessing_function,
             batched=True,
             remove_columns=remove_columns,
+
         )
 
         # Filter out samples that have input_ids exceeding max_length
@@ -675,7 +680,7 @@ def main():
 
 
 
-
+    lm_datasets.save_to_disk('maths')
 
 
     # if training_args.do_train:
