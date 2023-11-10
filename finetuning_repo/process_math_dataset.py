@@ -557,14 +557,14 @@ def main():
         print("Preprocessing dataset...")
         dataset = dataset.map(
             create_prompt_formats,
-            num_proc=data_args.preprocessing_num_workers
+            num_proc=data_args.preprocessing_num_workers,
+            load_from_cache_file=not data_args.overwrite_cache,
             )#, batched=True)
 
         print(len(max_arr))
-
-        exit()
         
         print("max_tokenized_id =============================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ",max_tokenized_id)
+        exit()
         
         # Apply preprocessing to each batch of the dataset & and remove 'instruction', 'context', 'response', 'category' fields
         _preprocessing_function = partial(preprocess_batch, max_length=max_tokenized_id, tokenizer=tokenizer)
