@@ -77,6 +77,7 @@ logger = logging.getLogger(__name__)
 MODEL_CONFIG_CLASSES = list(MODEL_FOR_CAUSAL_LM_MAPPING.keys())
 MODEL_TYPES = tuple(conf.model_type for conf in MODEL_CONFIG_CLASSES)
 
+max_tokenized_id = 0
 
 @dataclass
 class ModelArguments:
@@ -475,7 +476,7 @@ def main():
 
     ############ Adding trainer tokenizer for testing
 
-    max_tokenized_id = 0
+    
     seed = training_args.seed
     def create_prompt_formats(sample, intro_blurb="", instruction_key="", input_key="", response_key="", end_key=""):
         """
