@@ -509,25 +509,25 @@ def main():
         ret_obj = {}
         ret_obj["text"] = formatted_prompt
 
-        tokenized_text = tokenizer(
-            ret_obj["text"]
-        )
+        # tokenized_text = tokenizer(
+        #     ret_obj["text"]
+        # )
 
-        tokenized_text_len = len(tokenized_text["input_ids"])
+        # tokenized_text_len = len(tokenized_text["input_ids"])
 
-        if tokenized_text_len > max_tokenized_id:
+        # if tokenized_text_len > max_tokenized_id:
 
-            max_tokenized_id = tokenized_text_len
+        #     max_tokenized_id = tokenized_text_len
 
-            if tokenized_text_len > 1024:
+        #     if tokenized_text_len > 1024:
 
 
-                push_obj = {
-                    "text": formatted_prompt,
-                    "token_len": tokenized_text_len
-                }
+        #         push_obj = {
+        #             "text": formatted_prompt,
+        #             "token_len": tokenized_text_len
+        #         }
 
-                max_arr.append(push_obj)
+        #         max_arr.append(push_obj)
 
         return ret_obj
 
@@ -576,7 +576,7 @@ def main():
         )
 
         # Filter out samples that have input_ids exceeding max_length
-        dataset = dataset.filter(lambda sample: len(sample["input_ids"]) < max_length)
+        #dataset = dataset.filter(lambda sample: len(sample["input_ids"]) < max_length)
         
         # Shuffle dataset
         dataset = dataset.shuffle(seed=seed)
@@ -601,7 +601,7 @@ def main():
 
 
 
-    max_length = 1024 # get_max_length(model)
+    max_length = 512 # get_max_length(model)
     tokenized_datasets = preprocess_dataset(tokenizer, max_length, seed, datasets, ["question", "answer", "text"])
 
     #################################################
