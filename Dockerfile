@@ -1,4 +1,6 @@
 FROM nvidia/cuda:11.7.1-devel-ubuntu20.04
+#FROM nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu20.04
+#FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -9,6 +11,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,video,utility
 
 RUN apt update -y \
 && apt upgrade -y
+
+#RUN apt-get install software-properties-common -y &&   add-apt-repository ppa:deadsnakes/ppa
 
 RUN apt install wget -y \
 && apt install git -y \ 
@@ -23,7 +27,8 @@ RUN pip install --upgrade pip setuptools wheel
 
 RUN pip install ninja
 
-RUN pip install torch torchvision torchaudio
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#RUN pip install torch torchvision torchaudio
 
 RUN pip install datasets 
 
@@ -39,7 +44,7 @@ RUN pip install triton
 
 RUN pip install git+https://github.com/microsoft/DeepSpeed.git@v0.10.3
 
-RUN pip install git+https://github.com/microsoft/DeepSpeed-MII.git
+#RUN pip install git+https://github.com/microsoft/DeepSpeed-MII.git
 
 RUN pip install wandb
 
@@ -58,6 +63,10 @@ RUN pip install ninja packaging
 RUN MAX_JOBS=4 pip install flash-attn --no-build-isolation
 
 RUN pip install rich
+
+RUN apt install cuda-toolkit -y
+
+RUN python -c "from deepspeed.ops.op_builder import CPUAdamBuilder; CPUAdamBuilder().load()"
 
 WORKDIR /workspace
 

@@ -1,0 +1,16 @@
+deepspeed --num_gpus=4 run_clm.py --deepspeed ds_config_stage3.json --model_name_or_path openchat/openchat_3.5 --train_file /home/shaunst/train_llama.json --validation_file /home/shaunst/eval_llama.json --do_train --do_eval --fp16 --overwrite_cache --evaluation_strategy=steps --output_dir finetuned --num_train_epochs 1  --eval_steps 1000 --tokenizer_name openchat/openchat_3.5 --load_best_model_at_end=True --report_to=wandb --preprocessing_num_workers 8 --per_device_train_batch_size 1 --logging_steps 100 --per_device_eval_batch_size 4 --save_steps 1000
+
+
+
+
+deepspeed --num_gpus=4 run_clm_v2.py --deepspeed ds_config_stage3_orig.json --model_name_or_path openchat/openchat_3.5 --train_file /home/shaunst/train_llama.json --validation_file /home/shaunst/eval_llama.json --do_train --do_eval --fp16 --overwrite_cache --evaluation_strategy=steps --output_dir finetuned --num_train_epochs 1  --eval_steps 1000 --use_fast_tokenizer False --learning_rate 5e-06 --warmup_steps 10 --save_total_limit 1 --save_steps 1000 --save_strategy steps --tokenizer_name openchat/openchat_3.5 --load_best_model_at_end=True --block_size=2048 --report_to=wandb --logging_steps 100 --per_device_train_batch_size 1 --per_device_eval_batch_size 4
+
+
+
+
+
+deepspeed --num_gpus=4 run_clm_v2.py --deepspeed ds_config_stage3_orig.json --model_name_or_path openchat/openchat_3.5 --train_file /home/shaunst/train_llama.json --validation_file /home/shaunst/eval_llama.json --do_train --do_eval --fp16 --overwrite_cache --evaluation_strategy=steps --output_dir finetuned --num_train_epochs 1  --eval_steps 1000 --use_fast_tokenizer True --learning_rate 5e-06 --warmup_steps 10 --save_total_limit 1 --save_steps 1000 --save_strategy steps --tokenizer_name openchat/openchat_3.5 --load_best_model_at_end=True --block_size=2048 --report_to=wandb --logging_steps 100 --per_device_train_batch_size 1 --per_device_eval_batch_size 4
+
+deepspeed --num_gpus=2 run_clm_v3.py --deepspeed ds_config_stage3_orig.json --model_name_or_path HuggingFaceH4/zephyr-7b-beta --train_file train_llama.json --validation_file eval_llama.json --do_train --do_eval --bf16 --overwrite_cache --evaluation_strategy=steps --output_dir output --num_train_epochs 1  --eval_steps 100 --use_fast_tokenizer True --warmup_steps 10 --save_total_limit 2 --save_steps 100 --save_strategy steps --tokenizer_name HuggingFaceH4/zephyr-7b-beta --load_best_model_at_end=True --block_size=2048 --report_to=wandb --logging_steps 100 --per_device_train_batch_size 24 --per_device_eval_batch_size 32
+
+python process_math_dataset.py --deepspeed ds_config_stage3_orig.json --model_name_or_path HuggingFaceH4/zephyr-7b-beta --train_file train_llama.json --validation_file eval_llama.json --do_train --do_eval --bf16 --overwrite_cache --evaluation_strategy=steps --output_dir maths --num_train_epochs 1  --eval_steps 10 --use_fast_tokenizer True --warmup_steps 10 --save_total_limit 1 --save_steps 10 --save_strategy steps --tokenizer_name HuggingFaceH4/zephyr-7b-beta --load_best_model_at_end=True --block_size=2048 --report_to=wandb --logging_steps 10 --per_device_train_batch_size 24 --per_device_eval_batch_size 32
