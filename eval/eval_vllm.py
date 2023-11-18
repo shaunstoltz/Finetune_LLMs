@@ -203,13 +203,13 @@ if __name__ == "__main__":
         # Decode output & print it
         #print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
-        response = outputs[0]
+        response = ""
 
         # Print the outputs.
         for output in outputs:
             prompt = output.prompt
-            generated_text = output.outputs[0].text
-            print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+            response = output.outputs[0].text
+            print(f"Prompt: {prompt!r}, Generated text: {response!r}")
 
         print(response)
 
