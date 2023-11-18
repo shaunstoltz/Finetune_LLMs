@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     sampling_params = SamplingParams(temperature=0.8, top_p=0.95)
 
-    llm = LLM(model=model_name, trust_remote_code=True)
+    llm = LLM(model=model_name, trust_remote_code=True, dtype="fp16")
     j = 0
     for i in data:
         question = i['question']
