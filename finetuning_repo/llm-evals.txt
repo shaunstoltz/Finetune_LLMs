@@ -1,0 +1,221 @@
+hf (pretrained=openchat/openchat_3.5), limit: None, num_fewshot: None, batch_size: 4
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.5768|±  |0.0144|
+|              |       |none      |acc_norm   |0.6169|±  |0.0142|
+|drop          |Yaml   |none      |em         |0.0144|±  |0.0012|
+|              |       |none      |f1         |0.1127|±  |0.0021|
+|gsm8k         |Yaml   |get-answer|exact_match|0.6702|±  |0.0129|
+|hellaswag     |Yaml   |none      |acc        |0.6353|±  |0.0048|
+|              |       |none      |acc_norm   |0.8207|±  |0.0038|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3121|±  |0.0162|
+|winogrande    |Yaml   |none      |acc        |0.7261|±  |0.0125|
+
+
+
+
+
+
+
+
+
+
+================================================
+hf (pretrained=01-ai/Yi-6B,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4625|±  |0.0146|
+|              |       |none      |acc_norm   |0.5017|±  |0.0146|
+|drop          |Yaml   |none      |em         |0.0012|±  |0.0003|
+|              |       |none      |f1         |0.0312|±  |0.0012|
+|gsm8k         |Yaml   |get-answer|exact_match|0.3199|±  |0.0128|
+|hellaswag     |Yaml   |none      |acc        |0.5540|±  |0.0050|
+|              |       |none      |acc_norm   |0.7491|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2889|±  |0.0159|
+|winogrande    |Yaml   |none      |acc        |0.7127|±  |0.0127|
+
+No code dataset
+hf (pretrained=/root/Finetune_LLMs/cp100/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4334|±  |0.0145|
+|              |       |none      |acc_norm   |0.4659|±  |0.0146|
+|drop          |Yaml   |none      |em         |0.0002|±  |0.0001|
+|              |       |none      |f1         |0.0421|±  |0.0010|
+|gsm8k         |Yaml   |get-answer|exact_match|0.2146|±  |0.0113|
+|hellaswag     |Yaml   |none      |acc        |0.5544|±  |0.0050|
+|              |       |none      |acc_norm   |0.7424|±  |0.0044|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3072|±  |0.0162|
+|winogrande    |Yaml   |none      |acc        |0.7293|±  |0.0125|
+
+hf (pretrained=/root/Finetune_LLMs/cp200/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4027|±  |0.0143|
+|              |       |none      |acc_norm   |0.4411|±  |0.0145|
+|drop          |Yaml   |none      |em         |0.0000|±  |0.0000|
+|              |       |none      |f1         |0.0655|±  |0.0012|
+|gsm8k         |Yaml   |get-answer|exact_match|0.3078|±  |0.0127|
+|hellaswag     |Yaml   |none      |acc        |0.5544|±  |0.0050|
+|              |       |none      |acc_norm   |0.7421|±  |0.0044|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3035|±  |0.0161|
+|winogrande    |Yaml   |none      |acc        |0.7040|±  |0.0128|
+
+hf (pretrained=/root/Finetune_LLMs/cp300/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4198|±  |0.0144|
+|              |       |none      |acc_norm   |0.4394|±  |0.0145|
+|drop          |Yaml   |none      |em         |0.0001|±  |0.0001|
+|              |       |none      |f1         |0.0515|±  |0.0011|
+|gsm8k         |Yaml   |get-answer|exact_match|0.2873|±  |0.0125|
+|hellaswag     |Yaml   |none      |acc        |0.5453|±  |0.0050|
+|              |       |none      |acc_norm   |0.7313|±  |0.0044|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3158|±  |0.0163|
+|winogrande    |Yaml   |none      |acc        |0.7103|±  |0.0127|
+
+
+hf (pretrained=/root/Finetune_LLMs/cp1600/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.3490|±  |0.0139|
+|              |       |none      |acc_norm   |0.3686|±  |0.0141|
+|drop          |Yaml   |none      |em         |0.0000|±  |0.0000|
+|              |       |none      |f1         |0.0280|±  |0.0008|
+|gsm8k         |Yaml   |get-answer|exact_match|0.0099|±  |0.0027|
+|hellaswag     |Yaml   |none      |acc        |0.4968|±  |0.0050|
+|              |       |none      |acc_norm   |0.6644|±  |0.0047|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2815|±  |0.0157|
+|winogrande    |Yaml   |none      |acc        |0.6409|±  |0.0135|
+
+
+
+
+==========================================================================================
+Full dataset
+hf (pretrained=/root/Finetune_LLMs/cp100/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4360|±  |0.0145|
+|              |       |none      |acc_norm   |0.4650|±  |0.0146|
+|drop          |Yaml   |none      |em         |0.0007|±  |0.0003|
+|              |       |none      |f1         |0.0160|±  |0.0008|
+|gsm8k         |Yaml   |get-answer|exact_match|0.3404|±  |0.0131|
+|hellaswag     |Yaml   |none      |acc        |0.5573|±  |0.0050|
+|              |       |none      |acc_norm   |0.7454|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3035|±  |0.0161|
+|winogrande    |Yaml   |none      |acc        |0.7190|±  |0.0126|
+
+
+
+
+hf (pretrained=/root/Finetune_LLMs/cp1300/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.3601|±  |0.0140|
+|              |       |none      |acc_norm   |0.3916|±  |0.0143|
+|drop          |Yaml   |none      |em         |0.0008|±  |0.0003|
+|              |       |none      |f1         |0.0529|±  |0.0012|
+|gsm8k         |Yaml   |get-answer|exact_match|0.2509|±  |0.0119|
+|hellaswag     |Yaml   |none      |acc        |0.5101|±  |0.0050|
+|              |       |none      |acc_norm   |0.6795|±  |0.0047|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.3121|±  |0.0162|
+|winogrande    |Yaml   |none      |acc        |0.6582|±  |0.0133|
+
+
+hf (pretrained=/root/Finetune_LLMs/cp1700/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.3490|±  |0.0139|
+|              |       |none      |acc_norm   |0.3823|±  |0.0142|
+|drop          |Yaml   |none      |em         |0.0020|±  |0.0005|
+|              |       |none      |f1         |0.0400|±  |0.0011|
+|gsm8k         |Yaml   |get-answer|exact_match|0.1509|±  |0.0099|
+|hellaswag     |Yaml   |none      |acc        |0.5011|±  |0.0050|
+|              |       |none      |acc_norm   |0.6737|±  |0.0047|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2864|±  |0.0158|
+|winogrande    |Yaml   |none      |acc        |0.6472|±  |0.0134|
+
+
+
+
+hf (pretrained=/root/Finetune_LLMs/cp2600/checkpoint-2600/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.3268|±  |0.0137|
+|              |       |none      |acc_norm   |0.3754|±  |0.0142|
+|drop          |Yaml   |none      |em         |0.0006|±  |0.0003|
+|              |       |none      |f1         |0.0227|±  |0.0007|
+|gsm8k         |Yaml   |get-answer|exact_match|0.0607|±  |0.0066|
+|hellaswag     |Yaml   |none      |acc        |0.4717|±  |0.0050|
+|              |       |none      |acc_norm   |0.6327|±  |0.0048|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2791|±  |0.0157|
+|winogrande    |Yaml   |none      |acc        |0.6006|±  |0.0138|
+
+
+hf (pretrained=/root/Finetune_LLMs/finetuning_repo/output/checkpoint-3400/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.3285|±  |0.0137|
+|              |       |none      |acc_norm   |0.3601|±  |0.0140|
+|drop          |Yaml   |none      |em         |0.0014|±  |0.0004|
+|              |       |none      |f1         |0.0374|±  |0.0010|
+|gsm8k         |Yaml   |get-answer|exact_match|0.0660|±  |0.0068|
+|hellaswag     |Yaml   |none      |acc        |0.4651|±  |0.0050|
+|              |       |none      |acc_norm   |0.6304|±  |0.0048|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2729|±  |0.0156|
+|winogrande    |Yaml   |none      |acc        |0.6156|±  |0.0137|
+
+
+
+
+================================================
+
+hf (pretrained=01-ai/Yi-6B,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|    Tasks     |Version|Filter| Metric |Value |   |Stderr|
+|--------------|-------|------|--------|-----:|---|-----:|
+|arc_challenge |Yaml   |none  |acc     |0.4625|±  |0.0146|
+|              |       |none  |acc_norm|0.5077|±  |0.0146|
+|hellaswag     |Yaml   |none  |acc     |0.5549|±  |0.0050|
+|              |       |none  |acc_norm|0.7491|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none  |acc     |0.2889|±  |0.0159|
+
+
+
+hf (pretrained=/home/shaunst/models/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|Tasks|Version|  Filter  |  Metric   |Value |   |Stderr|
+|-----|-------|----------|-----------|-----:|---|-----:|
+|gsm8k|Yaml   |get-answer|exact_match|0.4041|±  |0.0135|
+
+
+
+
+wandb: Run history:
+wandb:                      eval/loss █▇▇▆▅▅▄▃▃▂▂▁▁▁
+wandb:                   eval/runtime ▁▁▁▁▁▁▃█▅▆▃▂▄▃
+wandb:        eval/samples_per_second ██████▆▁▄▃▆▇▅▆
+wandb:          eval/steps_per_second ▇▇▇▇▇█▆▁▄▃▆▆▅▆
+wandb:                    train/epoch ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:              train/global_step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:            train/learning_rate ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                     train/loss ██▄▇██▅▅▆▄▄▃▅▆▅▅▅▆▃▄▃▅▆▄▄▁▃▁▄▂▃▃▃▂▂▄▂▂▂▂
+wandb:               train/total_flos ▁
+wandb:               train/train_loss ▁
+wandb:            train/train_runtime ▁
+wandb: train/train_samples_per_second ▁
+wandb:   train/train_steps_per_second ▁
+wandb: 
+wandb: Run summary:
+wandb:                      eval/loss 0.14847
+wandb:                   eval/runtime 444.7628
+wandb:        eval/samples_per_second 24.678
+wandb:          eval/steps_per_second 0.13
+wandb:                    train/epoch 1.0
+wandb:              train/global_step 3448
+wandb:            train/learning_rate 5e-05
+wandb:                     train/loss 0.1499
+wandb:               train/total_flos 439932829040640.0
+wandb:               train/train_loss 0.06064
+wandb:            train/train_runtime 63470.5046
+wandb: train/train_samples_per_second 8.473
+wandb:   train/train_steps_per_second 0.054
