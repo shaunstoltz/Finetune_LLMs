@@ -174,7 +174,9 @@ if __name__ == "__main__":
     if input_dataset == "gsm8k":
         if input_file is not None:
             with open(input_file) as f:
-                data = [json.loads(line) for line in f]    
+                data = [json.loads(line) for line in f]   
+                 
+    data = data[int(start):int(start + number)]
 
     pipe = pipeline(model_name)
     #llm = LLM(model=model_name, trust_remote_code=True, dtype="float16")
