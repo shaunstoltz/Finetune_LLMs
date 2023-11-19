@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
         response = output
 
-        print(response)
+        print(response.generated_texts)
 
         result = {
             "ground_truth": answer,
