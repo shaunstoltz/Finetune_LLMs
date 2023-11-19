@@ -270,7 +270,7 @@ if __name__ == "__main__":
                     elem['question'] = elem['question'] + " " + elem['Question']
                     data.append(elem)
 
-    if input_dataset == "gsm8k":
+    if input_dataset == "gsm8k" or input_dataset == "gsm8kcot":
         if input_file is not None:
             with open(input_file) as f:
                 data = [json.loads(line) for line in f] 
@@ -284,11 +284,11 @@ if __name__ == "__main__":
     output_merged_dir = "results/7b/final_merged_checkpoint"
     os.makedirs(output_merged_dir, exist_ok=True)
 
-    model_name = "EleutherAI/llemma_7b" 
-    model_name = "HuggingFaceH4/zephyr-7b-beta"
-    model_name="/mnt/md1/shaun/repos/ai/models/yi6bfulldatasetfinalcp/"
+    # model_name = "EleutherAI/llemma_7b" 
+    # model_name = "HuggingFaceH4/zephyr-7b-beta"
+    # model_name="/mnt/md1/shaun/repos/ai/models/yi6bfulldatasetfinalcp/"
     
-    data = data[int(start):int(start + number)]
+    #data = data[int(start):int(start + number)]
     bnb_config = create_bnb_config()
     model, tokenizer = load_model(model_name, bnb_config)
 
@@ -300,7 +300,13 @@ if __name__ == "__main__":
     j = 0
     for i in data:
         question = i['question']
-        answer = i['answer']
+
+        answer = ""
+        question = i['question']
+        if input_dataset == "gsm8kcot":
+            answer = i['label']
+        else:
+            answer = i['answer']
 
         print(j, " Ground truth answer: ", answer)
 

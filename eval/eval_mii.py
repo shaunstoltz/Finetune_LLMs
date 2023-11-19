@@ -171,7 +171,7 @@ if __name__ == "__main__":
                     elem['question'] = elem['question'] + " " + elem['Question']
                     data.append(elem)
 
-    if input_dataset == "gsm8k":
+    if input_dataset == "gsm8k" or input_dataset == "gsm8kcot":
         if input_file is not None:
             with open(input_file) as f:
                 data = [json.loads(line) for line in f]   
@@ -182,9 +182,12 @@ if __name__ == "__main__":
     #llm = LLM(model=model_name, trust_remote_code=True, dtype="float16")
     j = 0
     for i in data:
+        answer = ""
         question = i['question']
-        answer = i['answer']
-
+        if input_dataset == "gsm8kcot":
+            answer = i['label']
+        else:
+            answer = i['answer']
         print(j, " Ground truth answer: ", answer)
 
         pre_prompt = ""
