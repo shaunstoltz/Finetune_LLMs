@@ -238,7 +238,10 @@ if __name__ == "__main__":
     results['number'] = number
     results["temperature"] = temperature
     results["top_p"] = top_p
-    
+
+
+    print(results)
+
     presentDate = datetime.datetime.now()
     unix_timestamp = datetime.datetime.timestamp(presentDate)*1000
     model_name = model_name.replace("/","_")
@@ -246,8 +249,7 @@ if __name__ == "__main__":
     file = open(file_path, 'w')
     file.write(json.dumps(results))
     file.close()
-    print(results)
-
+    
 
 
 
