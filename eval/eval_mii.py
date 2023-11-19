@@ -176,7 +176,7 @@ if __name__ == "__main__":
             with open(input_file) as f:
                 data = [json.loads(line) for line in f]   
                  
-    data = data[int(start):int(start + number)]
+    #data = data[int(start):int(start + number)]
 
     pipe = pipeline(model_name)
     #llm = LLM(model=model_name, trust_remote_code=True, dtype="float16")
