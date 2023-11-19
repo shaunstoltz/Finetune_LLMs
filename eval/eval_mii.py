@@ -203,9 +203,9 @@ if __name__ == "__main__":
         # Decode output & print it
         #print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
-        response = output
+        response = output.generated_texts[0]
 
-        print(response.generated_texts)
+        print(response.generated_texts[0])
 
         result = {
             "ground_truth": answer,
@@ -246,9 +246,9 @@ if __name__ == "__main__":
     unix_timestamp = datetime.datetime.timestamp(presentDate)*1000
     model_name = model_name.replace("/","_")
     file_path = f"{MAD_path}/data/output/dataset_{input_dataset}_tag_{input_dataset_tag}_start_{start}_number_{number}_post_{post}_model_{model_name}_{unix_timestamp}.json"
-    # file = open(file_path, 'w')
-    # file.write(json.dumps(results))
-    # file.close()
+    file = open(file_path, 'w')
+    file.write(json.dumps(results))
+    file.close()
     
 
 
