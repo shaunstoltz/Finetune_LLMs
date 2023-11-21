@@ -393,6 +393,10 @@ def main():
         logger.info("Setting `block_size` to %d", data_args.block_size)
         tokenizer.model_max_length = data_args.block_size
 
+
+
+
+
     if model_args.use_lora and model_args.lora_bits == 4:
         logger.info("Using QLora")
 
@@ -440,9 +444,44 @@ def main():
                 **kwargs
             )
         if model_args.use_lora:
-            peft_config = LoraConfig(
-                task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
-            )
+
+            def create_peft_config(modules):
+                """
+                Create Parameter-Efficient Fine-Tuning config for your model
+                :param modules: Names of the modules to apply Lora to
+                """
+                config = LoraConfig(
+                    r=16,  # dimension of the updated matrices
+                    lora_alpha=64,  # parameter for scaling
+                    target_modules=modules,
+                    lora_dropout=0.1,  # dropout probability for layers
+                    bias="none",
+                    task_type="CAUSAL_LM",
+                )
+
+                return config
+
+            # SOURCE https://github.com/artidoro/qlora/blob/main/qlora.py
+            def find_all_linear_names(model):
+                cls = torch.nn.Linear #if args.bits == 4 else (bnb.nn.Linear8bitLt if args.bits == 8 else torch.nn.Linear)
+                lora_module_names = set()
+                for name, module in model.named_modules():
+                    if isinstance(module, cls):
+                        names = name.split('.')
+                        lora_module_names.add(names[0] if len(names) == 1 else names[-1])
+
+                if 'lm_head' in lora_module_names:  # needed for 16-bit
+                    lora_module_names.remove('lm_head')
+                return list(lora_module_names)
+            # Get lora module names
+            modules = find_all_linear_names(model)
+
+            # Create PEFT config for these modules and wrap the model to PEFT
+            peft_config = create_peft_config(modules)
+
+            # peft_config = LoraConfig(
+            #     task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
+            # )
             model = get_peft_model(model, peft_config)
             model.print_trainable_parameters()
 
