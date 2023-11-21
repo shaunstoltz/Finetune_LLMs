@@ -580,7 +580,7 @@ def main():
         )
         logger.info("Grouping texts into single entries")
 
-    lm_datasets.save_to_disk('maths')
+    lm_datasets.save_to_disk('maths_prompt')
 
     exit()
 

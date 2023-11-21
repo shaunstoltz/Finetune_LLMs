@@ -686,7 +686,7 @@ def main():
     #     logger.info("Grouping texts into single entries")
 
     
-    lm_datasets = load_from_disk("maths")
+    lm_datasets = load_from_disk("maths_prompt")
 
     eval_dataset = lm_datasets["validation"]
     train_dataset = lm_datasets["train"]
