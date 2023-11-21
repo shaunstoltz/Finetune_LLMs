@@ -481,9 +481,9 @@ def main():
 
             # Create PEFT config for these modules and wrap the model to PEFT
             peft_config = create_peft_config(modules)
-            # peft_config = LoraConfig(
-            #     task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
-            # )
+            peft_config = LoraConfig(
+                task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
+            )
             model = get_peft_model(model, peft_config)
             model.print_trainable_parameters()
 

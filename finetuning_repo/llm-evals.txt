@@ -189,16 +189,16 @@ hf (pretrained=/home/shaunst/models/,trust_remote_code=True), limit: None, num_f
 
 
 
-
+Prompt_formate_yi
 wandb: Run history:
-wandb:                      eval/loss █▇▇▆▅▅▄▃▃▂▂▁▁▁
-wandb:                   eval/runtime ▁▁▁▁▁▁▃█▅▆▃▂▄▃
-wandb:        eval/samples_per_second ██████▆▁▄▃▆▇▅▆
-wandb:          eval/steps_per_second ▇▇▇▇▇█▆▁▄▃▆▆▅▆
-wandb:                    train/epoch ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb:                      eval/loss █▄▃▁▁
+wandb:                   eval/runtime ▆▃▂▁█
+wandb:        eval/samples_per_second ▃▆▇█▁
+wandb:          eval/steps_per_second ▃▆██▁
+wandb:                    train/epoch ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
 wandb:              train/global_step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
-wandb:            train/learning_rate ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-wandb:                     train/loss ██▄▇██▅▅▆▄▄▃▅▆▅▅▅▆▃▄▃▅▆▄▄▁▃▁▄▂▃▃▃▂▂▄▂▂▂▂
+wandb:            train/learning_rate ▁▃▅▆▆▇▇█████████████████████████████████
+wandb:                     train/loss █▅▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 wandb:               train/total_flos ▁
 wandb:               train/train_loss ▁
 wandb:            train/train_runtime ▁
@@ -206,16 +206,18 @@ wandb: train/train_samples_per_second ▁
 wandb:   train/train_steps_per_second ▁
 wandb: 
 wandb: Run summary:
-wandb:                      eval/loss 0.14847
-wandb:                   eval/runtime 444.7628
-wandb:        eval/samples_per_second 24.678
-wandb:          eval/steps_per_second 0.13
+wandb:                      eval/loss 0.28944
+wandb:                   eval/runtime 169.8335
+wandb:        eval/samples_per_second 33.185
+wandb:          eval/steps_per_second 0.524
 wandb:                    train/epoch 1.0
-wandb:              train/global_step 3448
+wandb:              train/global_step 46024
 wandb:            train/learning_rate 5e-05
-wandb:                     train/loss 0.1499
-wandb:               train/total_flos 439932829040640.0
-wandb:               train/train_loss 0.06064
-wandb:            train/train_runtime 63470.5046
-wandb: train/train_samples_per_second 8.473
-wandb:   train/train_steps_per_second 0.054
+wandb:                     train/loss 0.2935
+wandb:               train/total_flos 4.951006796333449e+18
+wandb:               train/train_loss 0.49355
+wandb:            train/train_runtime 27142.6165
+wandb: train/train_samples_per_second 10.174
+wandb:   train/train_steps_per_second 1.696
+
+
