@@ -489,19 +489,22 @@ def main():
         :param sample: Sample dictionnary
         """
         INTRO_BLURB = "Below is question that describes a math problem. Write a response that appropriately answert the question."
-        INSTRUCTION_KEY = "### Instruction:"
-        INPUT_KEY = "### Input:"
-        RESPONSE_KEY = "### Response:"
-        END_KEY = "### End"
+        # INSTRUCTION_KEY = "### Instruction:"
+        # INPUT_KEY = "### Input:"
+        # RESPONSE_KEY = "### Response:"
+        # END_KEY = "### End"
+
+        INSTRUCTION_KEY = "Question: "
+        RESPONSE_KEY = "Answer: #### "
         
         blurb = f"{INTRO_BLURB}"
-        instruction = f"{INSTRUCTION_KEY}\n{sample['question']}"
+        instruction = f"{INSTRUCTION_KEY}{sample['question']}"
         # input_context = f"{INPUT_KEY}\n{sample['context']}" if sample["context"] else None
-        response = f"{RESPONSE_KEY}\n{sample['answer']}"
-        end = f"{END_KEY}"
+        response = f"{RESPONSE_KEY}{sample['answer']}"
+        #end = f"{END_KEY}"
 
-        parts = [part for part in [blurb, instruction, response, end] if part]
-        
+        #parts = [part for part in [blurb, instruction, response, end] if part]
+        parts = [part for part in [blurb, instruction, response] if part]
         #    parts = [part for part in [intro_blurb, instruction_key, input_key, response_key, end_key] if part]
 
         formatted_prompt = "\n\n".join(parts)
