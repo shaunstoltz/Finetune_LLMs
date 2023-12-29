@@ -29,7 +29,7 @@ from typing import Optional
 from pathlib import Path
 
 from datasets import load_dataset, load_from_disk
-from peft import get_peft_model, LoraConfig, TaskType
+from peft import get_peft_model, LoraConfig, TaskType, prepare_model_for_kbit_training
 
 from functools import partial
 
@@ -485,6 +485,7 @@ def main():
             peft_config = LoraConfig(
                 task_type=TaskType.CAUSAL_LM, inference_mode=False, r=64, lora_alpha=16, lora_dropout=0.1
             )
+            model = prepare_model_for_kbit_training(model)
             model = get_peft_model(model, peft_config)
             model.print_trainable_parameters()
 

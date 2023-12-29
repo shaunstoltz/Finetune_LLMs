@@ -1,3 +1,8 @@
+apt install libopenmpi-dev -y && pip install mpi4py
+git clone https://github.com/shaunstoltz/Finetune_LLMs.git
+scp shaunst@207.66.79.43:/home/shaunst/models/
+
+
 deepspeed --num_gpus=4 run_clm.py --deepspeed ds_config_stage3.json --model_name_or_path openchat/openchat_3.5 --train_file /home/shaunst/train_llama.json --validation_file /home/shaunst/eval_llama.json --do_train --do_eval --fp16 --overwrite_cache --evaluation_strategy=steps --output_dir finetuned --num_train_epochs 1  --eval_steps 1000 --tokenizer_name openchat/openchat_3.5 --load_best_model_at_end=True --report_to=wandb --preprocessing_num_workers 8 --per_device_train_batch_size 1 --logging_steps 100 --per_device_eval_batch_size 4 --save_steps 1000
 
 
@@ -27,3 +32,10 @@ deepspeed --num_gpus=2 run_clm_v3.py --deepspeed ds_config_stage2.json --model_n
 
 pyhthon eval_vllm.py -m mistralai/Mistral-7B-v0.1 -id gsm8k -i ....../Finetune_LLMs/data/gsm8k/test.jsonl
 
+
+
+python process_original_mathset.py --deepspeed ds_config_stage3_orig.json --model_name_or_path 01-ai/Yi-34B --train_file train_llama.json --validation_file eval_llama.json --do_train --do_eval --fp16 --overwrite_cache --evaluation_strategy=steps --output_dir maths --num_train_epochs 1  --eval_steps 10 --use_fast_tokenizer True --warmup_steps 10 --save_total_limit 1 --save_steps 10 --save_strategy steps --tokenizer_name 01-ai/Yi-34B --block_size=2048 --report_to=wandb --logging_steps 10 --per_device_train_batch_size 24 --per_device_eval_batch_size 32
+
+deepspeed --num_gpus=1 run_clm_v3.py --deepspeed ds_config_stage3_orig.json --model_name_or_path 01-ai/Yi-34B --train_file train.json --validation_file eval.json --do_train --bf16 --overwrite_cache --evaluation_strategy=steps --output_dir output --num_train_epochs 2  --eval_steps 10 --use_fast_tokenizer True --warmup_steps 500 --save_total_limit 1 --save_steps 1000 --save_strategy steps --tokenizer_name 01-ai/Yi-34B --block_size=2048 --report_to=wandb --logging_steps 10 --per_device_train_batch_size 16 --per_device_eval_batch_size 32 --learning_rate 5e-06
+
+python --num_gpus=2 run_clm_v3.py --deepspeed ds_config_stage2.json --model_name_or_path 01-ai/Yi-34B --train_file train.json --validation_file eval.json --do_train --do_eval --bf16 --overwrite_cache --evaluation_strategy=steps --output_dir output --num_train_epochs 1  --eval_steps 100000000 --use_fast_tokenizer True --warmup_steps 1000 --save_total_limit 1 --save_steps 1000 --save_strategy steps --tokenizer_name 01-ai/Yi-34B --block_size=2048 --report_to=wandb --logging_steps 10 --per_device_train_batch_size 1 --per_device_eval_batch_size 32 --split_model True --learning_rate 5e-06 --use_lora

@@ -20,7 +20,7 @@ hf (pretrained=openchat/openchat_3.5), limit: None, num_fewshot: None, batch_siz
 
 
 
-================================================
+================================================ OLD YI DONT USE
 hf (pretrained=01-ai/Yi-6B,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
 |    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
 |--------------|-------|----------|-----------|-----:|---|-----:|
@@ -34,7 +34,303 @@ hf (pretrained=01-ai/Yi-6B,trust_remote_code=True), limit: None, num_fewshot: No
 |truthfulqa_mc1|Yaml   |none      |acc        |0.2889|±  |0.0159|
 |winogrande    |Yaml   |none      |acc        |0.7127|±  |0.0127|
 
-No code dataset
+
+hf (pretrained=/home/shaunst/models/yi6b/aasnapshot/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4625|±  |0.0146|
+|              |       |none      |acc_norm   |0.5077|±  |0.0146|
+|gsm8k         |Yaml   |get-answer|exact_match|0.3594|±  |0.0132|
+|hellaswag     |Yaml   |none      |acc        |0.5549|±  |0.0050|
+|              |       |none      |acc_norm   |0.7491|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2889|±  |0.0159|
+|winogrande    |Yaml   |none      |acc        |0.7056|±  |0.0128|
+
+
+
+hf (pretrained=/home/shaunst/models/yi6b/aasnapshot/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|             Tasks             |Version|Filter|Metric|Value |   |Stderr|
+|-------------------------------|-------|------|------|-----:|---|-----:|
+|stem                           |N/A    |none  |acc   |0.5151|±  |0.1340|
+| - abstract_algebra            |Yaml   |none  |acc   |0.3100|±  |0.0465|
+| - anatomy                     |Yaml   |none  |acc   |0.6000|±  |0.0423|
+| - astronomy                   |Yaml   |none  |acc   |0.6645|±  |0.0384|
+| - college_biology             |Yaml   |none  |acc   |0.6736|±  |0.0392|
+| - college_chemistry           |Yaml   |none  |acc   |0.4400|±  |0.0499|
+| - college_computer_science    |Yaml   |none  |acc   |0.5000|±  |0.0503|
+| - college_mathematics         |Yaml   |none  |acc   |0.4000|±  |0.0492|
+| - college_physics             |Yaml   |none  |acc   |0.2647|±  |0.0439|
+| - computer_security           |Yaml   |none  |acc   |0.7500|±  |0.0435|
+| - conceptual_physics          |Yaml   |none  |acc   |0.5660|±  |0.0324|
+| - electrical_engineering      |Yaml   |none  |acc   |0.6207|±  |0.0404|
+| - elementary_mathematics      |Yaml   |none  |acc   |0.4233|±  |0.0254|
+| - high_school_biology         |Yaml   |none  |acc   |0.7677|±  |0.0240|
+| - high_school_chemistry       |Yaml   |none  |acc   |0.4926|±  |0.0352|
+| - high_school_computer_science|Yaml   |none  |acc   |0.6400|±  |0.0482|
+| - high_school_mathematics     |Yaml   |none  |acc   |0.3148|±  |0.0283|
+| - high_school_physics         |Yaml   |none  |acc   |0.3642|±  |0.0393|
+| - high_school_statistics      |Yaml   |none  |acc   |0.4861|±  |0.0341|
+| - machine_learning            |Yaml   |none  |acc   |0.4286|±  |0.0470|
+
+|Groups|Version|Filter|Metric|Value |   |Stderr|
+|------|-------|------|------|-----:|---|-----:|
+|stem  |N/A    |none  |acc   |0.5151|±  | 0.134|
+
+hf (pretrained=/home/shaunst/models/yi6b/aasnapshot/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|          Tasks           |Version|Filter|Metric|Value |   |Stderr|
+|--------------------------|-------|------|------|-----:|---|-----:|
+|other                     |N/A    |none  |acc   |0.6904|±  |0.1121|
+| - business_ethics        |Yaml   |none  |acc   |0.6700|±  |0.0473|
+| - clinical_knowledge     |Yaml   |none  |acc   |0.6717|±  |0.0289|
+| - college_medicine       |Yaml   |none  |acc   |0.6127|±  |0.0371|
+| - global_facts           |Yaml   |none  |acc   |0.3900|±  |0.0490|
+| - human_aging            |Yaml   |none  |acc   |0.6906|±  |0.0310|
+| - management             |Yaml   |none  |acc   |0.7961|±  |0.0399|
+| - marketing              |Yaml   |none  |acc   |0.8590|±  |0.0228|
+| - medical_genetics       |Yaml   |none  |acc   |0.7100|±  |0.0456|
+| - miscellaneous          |Yaml   |none  |acc   |0.8020|±  |0.0142|
+| - nutrition              |Yaml   |none  |acc   |0.7157|±  |0.0258|
+| - professional_accounting|Yaml   |none  |acc   |0.5035|±  |0.0298|
+| - professional_medicine  |Yaml   |none  |acc   |0.6765|±  |0.0284|
+| - virology               |Yaml   |none  |acc   |0.4458|±  |0.0387|
+
+|Groups|Version|Filter|Metric|Value |   |Stderr|
+|------|-------|------|------|-----:|---|-----:|
+|other |N/A    |none  |acc   |0.6904|±  |0.1121|
+
+hf (pretrained=/home/shaunst/models/yi6b/aasnapshot/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|                Tasks                 |Version|Filter|Metric|Value |   |Stderr|
+|--------------------------------------|-------|------|------|-----:|---|-----:|
+|social_sciences                       |N/A    |none  |acc   |0.7192|±  |0.0820|
+| - econometrics                       |Yaml   |none  |acc   |0.4211|±  |0.0464|
+| - high_school_geography              |Yaml   |none  |acc   |0.7828|±  |0.0294|
+| - high_school_government_and_politics|Yaml   |none  |acc   |0.8497|±  |0.0258|
+| - high_school_macroeconomics         |Yaml   |none  |acc   |0.6282|±  |0.0245|
+| - high_school_microeconomics         |Yaml   |none  |acc   |0.7101|±  |0.0295|
+| - high_school_psychology             |Yaml   |none  |acc   |0.8128|±  |0.0167|
+| - human_sexuality                    |Yaml   |none  |acc   |0.7252|±  |0.0392|
+| - professional_psychology            |Yaml   |none  |acc   |0.6552|±  |0.0192|
+| - public_relations                   |Yaml   |none  |acc   |0.6455|±  |0.0458|
+| - security_studies                   |Yaml   |none  |acc   |0.7143|±  |0.0289|
+| - sociology                          |Yaml   |none  |acc   |0.8010|±  |0.0282|
+| - us_foreign_policy                  |Yaml   |none  |acc   |0.8600|±  |0.0349|
+
+|    Groups     |Version|Filter|Metric|Value |   |Stderr|
+|---------------|-------|------|------|-----:|---|-----:|
+|social_sciences|N/A    |none  |acc   |0.7192|±  | 0.082|
+
+hf (pretrained=/home/shaunst/models/yi6b/aasnapshot/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|             Tasks             |Version|Filter|Metric|Value |   |Stderr|
+|-------------------------------|-------|------|------|-----:|---|-----:|
+|humanities                     |N/A    |none  |acc   |0.5492|±  |0.1443|
+| - formal_logic                |Yaml   |none  |acc   |0.3651|±  |0.0431|
+| - high_school_european_history|Yaml   |none  |acc   |0.7515|±  |0.0337|
+| - high_school_us_history      |Yaml   |none  |acc   |0.7843|±  |0.0289|
+| - high_school_world_history   |Yaml   |none  |acc   |0.7722|±  |0.0273|
+| - international_law           |Yaml   |none  |acc   |0.7851|±  |0.0375|
+| - jurisprudence               |Yaml   |none  |acc   |0.7593|±  |0.0413|
+| - logical_fallacies           |Yaml   |none  |acc   |0.7423|±  |0.0344|
+| - moral_disputes              |Yaml   |none  |acc   |0.6936|±  |0.0248|
+| - moral_scenarios             |Yaml   |none  |acc   |0.2458|±  |0.0144|
+| - philosophy                  |Yaml   |none  |acc   |0.6945|±  |0.0262|
+| - prehistory                  |Yaml   |none  |acc   |0.6975|±  |0.0256|
+| - professional_law            |Yaml   |none  |acc   |0.4824|±  |0.0128|
+| - world_religions             |Yaml   |none  |acc   |0.7661|±  |0.0325|
+
+|  Groups  |Version|Filter|Metric|Value |   |Stderr|
+|----------|-------|------|------|-----:|---|-----:|
+|humanities|N/A    |none  |acc   |0.5492|±  |0.1443|
+
+
+
+
+
+
+================ model prompt and full prompt for full dataset with caps ======================
+
+
+
+
+
+
+
+
+
+
+
+
+
+hf (pretrained=/home/shaunst//models/yi6b/yi6bmathsaasnapshot/cp7500,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|             Tasks             |Version|Filter|Metric|Value |   |Stderr|
+|-------------------------------|-------|------|------|-----:|---|-----:|
+|stem                           |N/A    |none  |acc   |0.4776|±  |0.1271|
+| - abstract_algebra            |Yaml   |none  |acc   |0.2900|±  |0.0456|
+| - anatomy                     |Yaml   |none  |acc   |0.5333|±  |0.0431|
+| - astronomy                   |Yaml   |none  |acc   |0.5724|±  |0.0403|
+| - college_biology             |Yaml   |none  |acc   |0.6528|±  |0.0398|
+| - college_chemistry           |Yaml   |none  |acc   |0.3900|±  |0.0490|
+| - college_computer_science    |Yaml   |none  |acc   |0.4800|±  |0.0502|
+| - college_mathematics         |Yaml   |none  |acc   |0.3400|±  |0.0476|
+| - college_physics             |Yaml   |none  |acc   |0.2745|±  |0.0444|
+| - computer_security           |Yaml   |none  |acc   |0.7400|±  |0.0441|
+| - conceptual_physics          |Yaml   |none  |acc   |0.5234|±  |0.0327|
+| - electrical_engineering      |Yaml   |none  |acc   |0.6069|±  |0.0407|
+| - elementary_mathematics      |Yaml   |none  |acc   |0.3624|±  |0.0248|
+| - high_school_biology         |Yaml   |none  |acc   |0.7323|±  |0.0252|
+| - high_school_chemistry       |Yaml   |none  |acc   |0.4581|±  |0.0351|
+| - high_school_computer_science|Yaml   |none  |acc   |0.5900|±  |0.0494|
+| - high_school_mathematics     |Yaml   |none  |acc   |0.2926|±  |0.0277|
+| - high_school_physics         |Yaml   |none  |acc   |0.3046|±  |0.0376|
+| - high_school_statistics      |Yaml   |none  |acc   |0.4954|±  |0.0341|
+| - machine_learning            |Yaml   |none  |acc   |0.3750|±  |0.0460|
+
+|Groups|Version|Filter|Metric|Value |   |Stderr|
+|------|-------|------|------|-----:|---|-----:|
+|stem  |N/A    |none  |acc   |0.4776|±  |0.1271|
+
+
+hf (pretrained=/home/shaunst//models/yi6b/yi6bmathsaasnapshot/cp7500,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|          Tasks           |Version|Filter|Metric|Value |   |Stderr|
+|--------------------------|-------|------|------|-----:|---|-----:|
+|other                     |N/A    |none  |acc   |0.6595|±  |0.1090|
+| - business_ethics        |Yaml   |none  |acc   |0.6300|±  |0.0485|
+| - clinical_knowledge     |Yaml   |none  |acc   |0.6528|±  |0.0293|
+| - college_medicine       |Yaml   |none  |acc   |0.5549|±  |0.0379|
+| - global_facts           |Yaml   |none  |acc   |0.3100|±  |0.0465|
+| - human_aging            |Yaml   |none  |acc   |0.6771|±  |0.0314|
+| - management             |Yaml   |none  |acc   |0.7476|±  |0.0430|
+| - marketing              |Yaml   |none  |acc   |0.8205|±  |0.0251|
+| - medical_genetics       |Yaml   |none  |acc   |0.6900|±  |0.0465|
+| - miscellaneous          |Yaml   |none  |acc   |0.7752|±  |0.0149|
+| - nutrition              |Yaml   |none  |acc   |0.6699|±  |0.0269|
+| - professional_accounting|Yaml   |none  |acc   |0.4752|±  |0.0298|
+| - professional_medicine  |Yaml   |none  |acc   |0.6140|±  |0.0296|
+| - virology               |Yaml   |none  |acc   |0.5060|±  |0.0389|
+
+|Groups|Version|Filter|Metric|Value |   |Stderr|
+|------|-------|------|------|-----:|---|-----:|
+|other |N/A    |none  |acc   |0.6595|±  | 0.109|
+
+hf (pretrained=/home/shaunst//models/yi6b/yi6bmathsaasnapshot/cp7500,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|                Tasks                 |Version|Filter|Metric|Value |   |Stderr|
+|--------------------------------------|-------|------|------|-----:|---|-----:|
+|social_sciences                       |N/A    |none  |acc   |0.6841|±  |0.0770|
+| - econometrics                       |Yaml   |none  |acc   |0.3947|±  |0.0460|
+| - high_school_geography              |Yaml   |none  |acc   |0.7222|±  |0.0319|
+| - high_school_government_and_politics|Yaml   |none  |acc   |0.8394|±  |0.0265|
+| - high_school_macroeconomics         |Yaml   |none  |acc   |0.5897|±  |0.0249|
+| - high_school_microeconomics         |Yaml   |none  |acc   |0.6387|±  |0.0312|
+| - high_school_psychology             |Yaml   |none  |acc   |0.7817|±  |0.0177|
+| - human_sexuality                    |Yaml   |none  |acc   |0.7328|±  |0.0388|
+| - professional_psychology            |Yaml   |none  |acc   |0.6193|±  |0.0196|
+| - public_relations                   |Yaml   |none  |acc   |0.6455|±  |0.0458|
+| - security_studies                   |Yaml   |none  |acc   |0.6571|±  |0.0304|
+| - sociology                          |Yaml   |none  |acc   |0.7861|±  |0.0290|
+| - us_foreign_policy                  |Yaml   |none  |acc   |0.8200|±  |0.0386|
+
+|    Groups     |Version|Filter|Metric|Value |   |Stderr|
+|---------------|-------|------|------|-----:|---|-----:|
+|social_sciences|N/A    |none  |acc   |0.6841|±  | 0.077|
+
+hf (pretrained=/home/shaunst//models/yi6b/yi6bmathsaasnapshot/cp7500,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|             Tasks             |Version|Filter|Metric|Value |   |Stderr|
+|-------------------------------|-------|------|------|-----:|---|-----:|
+|humanities                     |N/A    |none  |acc   |0.5209|±  |0.1357|
+| - formal_logic                |Yaml   |none  |acc   |0.3571|±  |0.0429|
+| - high_school_european_history|Yaml   |none  |acc   |0.6909|±  |0.0361|
+| - high_school_us_history      |Yaml   |none  |acc   |0.7304|±  |0.0311|
+| - high_school_world_history   |Yaml   |none  |acc   |0.7215|±  |0.0292|
+| - international_law           |Yaml   |none  |acc   |0.7603|±  |0.0390|
+| - jurisprudence               |Yaml   |none  |acc   |0.7130|±  |0.0437|
+| - logical_fallacies           |Yaml   |none  |acc   |0.7239|±  |0.0351|
+| - moral_disputes              |Yaml   |none  |acc   |0.6445|±  |0.0258|
+| - moral_scenarios             |Yaml   |none  |acc   |0.2425|±  |0.0143|
+| - philosophy                  |Yaml   |none  |acc   |0.6367|±  |0.0273|
+| - prehistory                  |Yaml   |none  |acc   |0.6327|±  |0.0268|
+| - professional_law            |Yaml   |none  |acc   |0.4648|±  |0.0127|
+| - world_religions             |Yaml   |none  |acc   |0.7544|±  |0.0330|
+
+|  Groups  |Version|Filter|Metric|Value |   |Stderr|
+|----------|-------|------|------|-----:|---|-----:|
+|humanities|N/A    |none  |acc   |0.5209|±  |0.1357|
+
+
+
+
+
+
+hf (pretrained=/root/Finetune_LLMs/finetuning_repo/outputqlora_prompt_v3/checkpoint-7500/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 8
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4428|±  |0.0145|
+|              |       |none      |acc_norm   |0.4701|±  |0.0146|
+|drop          |Yaml   |none      |em         |0.0046|±  |0.0007|
+|              |       |none      |f1         |0.0858|±  |0.0018|
+|gsm8k         |Yaml   |get-answer|exact_match|0.5375|±  |0.0137|
+|hellaswag     |Yaml   |none      |acc        |0.5685|±  |0.0049|
+|              |       |none      |acc_norm   |0.7562|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2987|±  |0.0160|
+|winogrande    |Yaml   |none      |acc        |0.7024|±  |0.0128|
+
+
+hf (pretrained=/home/shaunst/models/yi6b/cpend,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 1
+|             Tasks             |Version|Filter|Metric|Value |   |Stderr|
+|-------------------------------|-------|------|------|-----:|---|-----:|
+|stem                           |N/A    |none  |acc   |0.4818|±  |0.1309|
+| - abstract_algebra            |Yaml   |none  |acc   |0.2400|±  |0.0429|
+| - anatomy                     |Yaml   |none  |acc   |0.5481|±  |0.0430|
+| - astronomy                   |Yaml   |none  |acc   |0.5921|±  |0.0400|
+| - college_biology             |Yaml   |none  |acc   |0.6250|±  |0.0405|
+| - college_chemistry           |Yaml   |none  |acc   |0.3900|±  |0.0490|
+| - college_computer_science    |Yaml   |none  |acc   |0.4800|±  |0.0502|
+| - college_mathematics         |Yaml   |none  |acc   |0.3700|±  |0.0485|
+| - college_physics             |Yaml   |none  |acc   |0.2451|±  |0.0428|
+| - computer_security           |Yaml   |none  |acc   |0.7400|±  |0.0441|
+| - conceptual_physics          |Yaml   |none  |acc   |0.5745|±  |0.0323|
+| - electrical_engineering      |Yaml   |none  |acc   |0.6000|±  |0.0408|
+| - elementary_mathematics      |Yaml   |none  |acc   |0.3757|±  |0.0249|
+| - high_school_biology         |Yaml   |none  |acc   |0.7032|±  |0.0260|
+| - high_school_chemistry       |Yaml   |none  |acc   |0.4532|±  |0.0350|
+| - high_school_computer_science|Yaml   |none  |acc   |0.5600|±  |0.0499|
+| - high_school_mathematics     |Yaml   |none  |acc   |0.3259|±  |0.0286|
+| - high_school_physics         |Yaml   |none  |acc   |0.2781|±  |0.0366|
+| - high_school_statistics      |Yaml   |none  |acc   |0.4815|±  |0.0341|
+| - machine_learning            |Yaml   |none  |acc   |0.4821|±  |0.0474|
+
+|Groups|Version|Filter|Metric|Value |   |Stderr|
+|------|-------|------|------|-----:|---|-----:|
+|stem  |N/A    |none  |acc   |0.4818|±  |0.1309|
+
+
+
+
+hf (pretrained=/root/Finetune_LLMs/finetuning_repo/outputqlora_prompt_v3/checkpoint-12000/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 8
+|    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
+|--------------|-------|----------|-----------|-----:|---|-----:|
+|arc_challenge |Yaml   |none      |acc        |0.4258|±  |0.0144|
+|              |       |none      |acc_norm   |0.4599|±  |0.0146|
+|drop          |Yaml   |none      |em         |0.0045|±  |0.0007|
+|              |       |none      |f1         |0.0647|±  |0.0016|
+|gsm8k         |Yaml   |get-answer|exact_match|0.5466|±  |0.0137|
+|hellaswag     |Yaml   |none      |acc        |0.5672|±  |0.0049|
+|              |       |none      |acc_norm   |0.7513|±  |0.0043|
+|truthfulqa_mc1|Yaml   |none      |acc        |0.2974|±  |0.0160|
+|winogrande    |Yaml   |none      |acc        |0.6867|±  |0.0130|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+No code dataset ==============================================================
 hf (pretrained=/root/Finetune_LLMs/cp100/,trust_remote_code=True), limit: None, num_fewshot: None, batch_size: 16
 |    Tasks     |Version|  Filter  |  Metric   |Value |   |Stderr|
 |--------------|-------|----------|-----------|-----:|---|-----:|
